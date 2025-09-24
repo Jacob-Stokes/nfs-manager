@@ -1,0 +1,15 @@
+# Environment files with real credentials
+.env
+.env.local
+.env.production
+
+# Backup files
+*.backup
+*.bak
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
