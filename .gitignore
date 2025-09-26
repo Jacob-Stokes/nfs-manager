@@ -3,6 +3,10 @@
 .env.local
 .env.production
 
+# User-specific configuration files
+.domains
+.domain_settings
+
 # Backup files
 *.backup
 *.bak
