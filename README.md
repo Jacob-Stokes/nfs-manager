@@ -6,10 +6,11 @@ Management tools for NearlyFreeSpeech.NET accounts via API.
 
 ```
 nfs-repo/
-├── nfs-manager.sh          # Main interactive menu
-├── commands/               # Individual command scripts
+├── nfs-manager.sh          # Interactive menu interface
+├── nfs-cli.sh              # Command-line interface
+├── commands/               # Individual command scripts (interactive)
 │   ├── nfs-account-info.sh
-│   ├── nfs-dns.sh         # DNS management (interactive/CLI)
+│   ├── nfs-dns.sh
 │   ├── nfs-sites-list.sh
 │   ├── nfs-domains.sh
 │   ├── nfs-config.sh
@@ -30,9 +31,13 @@ nfs-repo/
 ### Command Line Mode
 ```bash
 # DNS operations
-./commands/nfs-dns.sh --domain example.com --list
-./commands/nfs-dns.sh --domain example.com --add --name www --type A --data 1.2.3.4
-./commands/nfs-dns.sh --domain example.com --delete --name www --type A --data 1.2.3.4
+./nfs-cli.sh dns --domain example.com --list
+./nfs-cli.sh dns --domain example.com --add --name www --type A --data 1.2.3.4
+./nfs-cli.sh dns --domain example.com --delete --name www --type A --data 1.2.3.4
+
+# Account and sites
+./nfs-cli.sh account --info
+./nfs-cli.sh sites --list
 ```
 
 ## Setup

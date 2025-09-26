@@ -36,6 +36,10 @@ dns_fetch_records() {
     local domain="$1"
     # Remove any trailing whitespace/newlines
     domain=$(printf '%s' "$domain" | tr -d '\n\r')
+
+    # Clear DNS_RECORDS to prevent stale data
+    DNS_RECORDS=""
+
     if ! make_api_call "POST" "listRRs" "" "dns" "$domain"; then
         return 1
     fi
@@ -281,10 +285,10 @@ dns_management_loop() {
             if confirm "Use default domain $DEFAULT_DOMAIN?" "y"; then
                 domain="$DEFAULT_DOMAIN"
             else
-                domain=$(select_domain_with_save) || return 0
+                domain=$(select_domain_with_save) || return 2
             fi
         else
-            domain=$(select_domain_with_save) || return 0
+            domain=$(select_domain_with_save) || return 2
         fi
 
         log_info "Managing DNS for $domain"

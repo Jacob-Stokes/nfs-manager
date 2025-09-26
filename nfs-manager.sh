@@ -51,7 +51,9 @@ invoke_script() {
 
     "$script_path" "$@"
     local status=$?
-    if (( status != 0 )); then
+    if (( status == 1 )); then
+        log_warning "$(basename "$script_path") exited with error (status $status)"
+    elif (( status > 2 )); then
         log_warning "$(basename "$script_path") exited with status $status"
     fi
     return $status
@@ -77,27 +79,45 @@ main() {
         case "$choice" in
             1)
                 invoke_script "$COMMANDS_DIR/nfs-account-info.sh"
-                pause_for_menu
+                local status=$?
+                if (( status == 0 )); then
+                    pause_for_menu
+                fi
                 ;;
             2)
                 invoke_script "$COMMANDS_DIR/nfs-sites-list.sh"
-                pause_for_menu
+                local status=$?
+                if (( status == 0 )); then
+                    pause_for_menu
+                fi
                 ;;
             3)
                 invoke_script "$COMMANDS_DIR/nfs-dns.sh"
-                pause_for_menu
+                local status=$?
+                if (( status == 0 )); then
+                    pause_for_menu
+                fi
                 ;;
             4)
                 invoke_script "$COMMANDS_DIR/nfs-domains.sh"
-                pause_for_menu
+                local status=$?
+                if (( status == 0 )); then
+                    pause_for_menu
+                fi
                 ;;
             5)
                 invoke_script "$COMMANDS_DIR/nfs-config.sh"
-                pause_for_menu
+                local status=$?
+                if (( status == 0 )); then
+                    pause_for_menu
+                fi
                 ;;
             6)
                 invoke_script "$COMMANDS_DIR/nfs-help.sh"
-                pause_for_menu
+                local status=$?
+                if (( status == 0 )); then
+                    pause_for_menu
+                fi
                 ;;
             q|Q)
                 echo ""
