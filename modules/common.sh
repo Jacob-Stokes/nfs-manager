@@ -33,11 +33,11 @@ NC='\033[0m'
 fi
 
 # Function definitions (always loaded)
-log_info()    { echo -e "${BLUE}[INFO]${NC} $1" >&2; }
-log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1" >&2; }
-log_warning() { echo -e "${YELLOW}[WARNING]${NC} $1" >&2; }
+log_info()    { [[ "${SUPPRESS_LOGS:-}" != "true" ]] && echo -e "${BLUE}[INFO]${NC} $1" >&2; }
+log_success() { [[ "${SUPPRESS_LOGS:-}" != "true" ]] && echo -e "${GREEN}[SUCCESS]${NC} $1" >&2; }
+log_warning() { [[ "${SUPPRESS_LOGS:-}" != "true" ]] && echo -e "${YELLOW}[WARNING]${NC} $1" >&2; }
 log_error()   { echo -e "${RED}[ERROR]${NC} $1" >&2; }
-log_prompt()  { echo -e "${CYAN}[PROMPT]${NC} $1" >&2; }
+log_prompt()  { [[ "${SUPPRESS_LOGS:-}" != "true" ]] && echo -e "${CYAN}[PROMPT]${NC} $1" >&2; }
 
 ensure_dependencies() {
     local missing=()

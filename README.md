@@ -38,6 +38,10 @@ nfs-repo/
 # Account and sites
 ./nfs-cli.sh account --info
 ./nfs-cli.sh sites --list
+
+# JSON output for automation
+./nfs-cli.sh --json dns --domain example.com --list
+./nfs-cli.sh --json sites | jq '.[0]'
 ```
 
 ## Setup
